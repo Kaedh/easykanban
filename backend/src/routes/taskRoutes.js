@@ -51,7 +51,7 @@ taskRoutes.put('/:id', async (req, res) => {
 
     const result = await taskServices.update(taskId, taskUpdated);
 
-    return res.json(result)
+    return res.json(result);
 });
 
 

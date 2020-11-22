@@ -35,7 +35,12 @@ taskRoutes.delete('/:id', async (req, res) => {
 
 
 taskRoutes.put('/:id', async (req, res) => {
+    const taskId = req.params.id;
+    const taskUpdated = req.body;
 
+    const result = await taskServices.update(taskId, taskUpdated);
+
+    return res.json(result)
 });
 
 

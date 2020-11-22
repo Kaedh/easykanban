@@ -41,8 +41,18 @@ class TaskServices {
         }
     };
 
-    async update() {
+    async update(taskId, newTask) {
+        try {
+            await  Task.updateOne(
+                { "_id" : taskId },
+                { $set : { "content" : newTask.content , "status" : newTask.status} });
+                
+                return { "message" : "task updated sucessfully" }
 
+        } catch (error) {
+            return error.message;
+
+        };
     };
 };
 

@@ -14,7 +14,9 @@ class TaskServices {
     };
 
     async get() {
+        const data = await Task.find().select({ 'content': 1, 'status': 1, '_id': 0 });
 
+        return data;
     };
 
     async getOrdered() {

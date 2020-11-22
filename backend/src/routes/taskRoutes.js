@@ -4,7 +4,9 @@ const TaskServices = require("../services/taskServices");
 const taskServices = new TaskServices;
 
 taskRoutes.get('/', async (req, res) => {
-    
+    const data = await taskServices.get();
+
+    return res.json(data);
 });
 
 

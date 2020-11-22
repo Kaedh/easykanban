@@ -6,12 +6,23 @@ const taskServices = new TaskServices;
 taskRoutes.get('/', async (req, res) => {
     const data = await taskServices.get();
 
+    if ( req.query.compact ) {
+        const dataCompact = {
+          todo : [],
+          inprogress : [],
+          done : []
+        };
+
+        data.forEach(task => {
+          if (task.status === "todo") dataCompact.todo.push(task);
+          if (task.status === "inprogress") dataCompact.inprogress.push(task);
+          if (task.status === "done") dataCompact.done.push(task);
+        });
+
+        return res.json(dataCompact);
+    };
+
     return res.json(data);
-});
-
-
-taskRoutes.get('/:ordered', async (req, res) => {
-
 });
 
 

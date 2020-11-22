@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 const Task = require("../database/models/taskModel");
 
 class TaskServices {
@@ -14,17 +16,29 @@ class TaskServices {
     };
 
     async get() {
-        const data = await Task.find().select({ 'content': 1, 'status': 1, '_id': 0 });
+        try {
+            const data = await Task.find().select({ 'content': 1, 'status': 1, '_id': 1 });
+            return data;
 
-        return data;
+        } catch (error) {
+            return error.message;
+
+        };        
     };
 
     async getOrdered() {
 
     };
 
-    async delete() {
+    async delete(taskId) {
+        try {
+            await Task.deleteOne( { "_id" : taskId } ) 
+            return { "message" : "task delete sucessfully" }
 
+        } catch (error) {
+            return error.message;
+
+        }
     };
 
     async update() {

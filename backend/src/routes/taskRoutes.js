@@ -26,7 +26,11 @@ taskRoutes.post('/', async (req, res) => {
 
 
 taskRoutes.delete('/:id', async (req, res) => {
+    const taskId = req.params.id;
 
+    const result = await taskServices.delete(taskId);
+
+    return res.json(result);
 });
 
 
